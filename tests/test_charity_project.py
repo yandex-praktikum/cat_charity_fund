@@ -410,6 +410,12 @@ def test_update_charity_project_full_amount_equal_invested_amount(
         'требуемую сумму больше или равную внесённой. Требуемая сумма не '
         'изменилась.'
     )
+    if response.json()['full_amount'] == response.json()['invested_amount']:
+        assert response.json()['fully_invested'], (
+            'Если при редактировании проекта установили требуемую сумму '
+            'равную внесенной, то проект должен автоматически закрыться. '
+            'Ваш проект не закрывается.'
+        )
 
 
 @pytest.mark.parametrize(
